@@ -4,5 +4,5 @@ public class Player {
     //                      his name(String) and methods to set and get that name
     //                      his HP(Int) and ways to get, increase and decrease it
     //                      his current location (Room) and a method to get it
-
+    //
 }
