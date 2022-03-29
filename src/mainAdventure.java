@@ -1,5 +1,5 @@
 public class mainAdventure {
-    public void main (String args[]) {
+    public static void main (String args[]) {
         // print title
         System.out.println("---SimpleAdventure---");
         // main loop goes here --------------------
