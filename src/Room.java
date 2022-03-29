@@ -2,10 +2,10 @@ import java.util.Vector;
 
 public class Room {
     // This is the room class each room belongs is of this class
-    // TODO: Need to have:
-    //                      a title(String) and methods to set and get that
-    //                      a description(String) and methods to set and get that
-    //                      the exits(Vector) and methods to set and get them
+    // we use this to create all rooms for our adventure it needs
+    // a title a description and the exits(as a Vector).
+    // TODO: In the Future we can add NPCs, Items and other stuff...
+
     private String title;
     private String description;
     private Vector exits;
