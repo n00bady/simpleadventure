@@ -4,5 +4,70 @@ public class Player {
     //                      his name(String) and methods to set and get that name
     //                      his HP(Int) and ways to get, increase and decrease it
     //                      his current location (Room) and a method to get it
+    //
 
+    private String name;
+    private int HP;
+    private Room location = null;
+
+    // Blank constructor
+    public Player() {
+        name = "Player";
+        HP = 10;
+        location = null;
+    }
+
+    // Name only constructor
+    public  Player(String Name) {
+        name = Name;
+        HP = 10;
+        location = null;
+    }
+
+    // Full constructor
+    public Player(String Name, int health, Room Location){
+        name = Name;
+        HP = health;
+        location = Location;
+    }
+
+    // Set name
+    public void setName(String Name) {
+        name = Name;
+    }
+
+    // Get name
+    public String getName() {
+        return name;
+    }
+
+    // Set location
+    public void setRoom(Room Location) {
+        location = Location;
+    }
+
+    // Get location
+    public Room getRoom() {
+        return location;
+    }
+
+    // Set HP
+    public void setHP(int hp) {
+        HP = hp;
+    }
+
+    // Get HP
+    public int getHP(){
+        return HP;
+    }
+
+    // Set increase HP
+    public void increaseHP(int heal) {
+        HP = HP + heal;
+    }
+
+    // Set decrease HP
+    public void decreaseHP(int damage) {
+        HP = HP - damage;
+    }
 }
