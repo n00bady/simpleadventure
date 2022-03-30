@@ -51,23 +51,23 @@ public class Player {
         return location;
     }
 
-    // Get increased HP
-    public void getIncreaseHP(int heal) {
-        HP = HP + heal;
+    // Set HP
+    public void setHP(int hp) {
+        HP = hp;
     }
 
-    // Set increased HP
-    public int setIncreaseHP() {
+    // Get HP
+    public int getHP(){
         return HP;
     }
 
-    // Get decreased HP
-    public void getDecreaseHP(int damage) {
-        HP = HP - damage;
+    // Set increase HP
+    public int increaseHP() {
+        return HP;
     }
 
-    // Set decreased HP
-    public int setDecreaseHP() {
+    // Set decrease HP
+    public int decreaseHP() {
         return HP;
     }
 }
