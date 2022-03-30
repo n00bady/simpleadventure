@@ -10,9 +10,25 @@ public class Player {
     private int HP;
     private Room location = null;
 
-    Player(String Name){
+    // Blank constructor
+    public Player() {
+        name = "Player";
+        HP = 10;
+        location = null;
+    }
+
+    // Name only constructor
+    public  Player(String Name) {
         name = Name;
         HP = 10;
+        location = null;
+    }
+
+    // Full constructor
+    public Player(String Name, int health, Room Location){
+        name = Name;
+        HP = health;
+        location = Location;
     }
 
     // Set name
