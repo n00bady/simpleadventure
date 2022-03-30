@@ -62,12 +62,12 @@ public class Player {
     }
 
     // Set increase HP
-    public int increaseHP() {
-        return HP;
+    public void increaseHP(int heal) {
+        HP = HP + heal;
     }
 
     // Set decrease HP
-    public int decreaseHP() {
-        return HP;
+    public void decreaseHP(int damage) {
+        HP = HP - damage;
     }
 }
