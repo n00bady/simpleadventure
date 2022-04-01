@@ -2,8 +2,8 @@ import java.util.Enumeration;
 import java.util.Scanner;
 
 public class mainLoop {
-    // TODO: Need to separate the display output and possibly player input on their own method also
-    //      need to support verbs (parser?) for action like go, look, pickup etc...
+    // TODO: Need to separate possibly player input on it's own method also
+    //      need to support verbs (parser?) for actions like go, look, pickup etc...
 
     private Room rooms[];
     private Player p1 = new Player();
@@ -20,6 +20,7 @@ public class mainLoop {
         // init world
         initWorld();
 
+        // this is the main game loop
         do {
             // displaying rooms
             displayRoom();
@@ -43,12 +44,10 @@ public class mainLoop {
             if (cmd.equals("QUIT") || cmd.equals("Q")) {
                 quit = true;
             }
-
         } while (!quit);
-
     }
 
-    // In theory we can have multiple world and initialize whichever we want.
+    // In theory, we can have multiple world and initialize whichever we want.
     public void initWorld() {
         // Room creation
         rooms = new Room[3];
@@ -68,11 +67,15 @@ public class mainLoop {
 
     }
 
+    // displays the current room title, description and exits
     public void displayRoom() {
         System.out.print("Current location:     ");
         System.out.println(p1.getRoom().getTitle());
         System.out.println("-------------------------------------");
         System.out.println(p1.getRoom().getDescription());
+        // this could be a separate method so the player can
+        // simply request the exits on their own and not have to get the whole
+        // displayRoom again
         System.out.println("Available exits: ");
         for (Enumeration e = p1.getRoom().getExits().elements(); e.hasMoreElements();) {
             Exit an_exit = (Exit) e.nextElement();
