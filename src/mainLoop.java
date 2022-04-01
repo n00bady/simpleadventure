@@ -21,15 +21,8 @@ public class mainLoop {
         initWorld();
 
         do {
-            // displaying things should be made a separate method
-            System.out.println(p1.getRoom().getTitle());
-            System.out.println("----------------");
-            System.out.println(p1.getRoom().getDescription());
-            System.out.println("The exits are:");
-            for (Enumeration e = p1.getRoom().getExits().elements(); e.hasMoreElements();) {
-                Exit an_exit = (Exit) e.nextElement();
-                System.out.println(an_exit.getFullDirectionName());
-            }
+            // displaying rooms
+            displayRoom();
 
             // get player input this should be a separate method
             String cmd = input.next();
@@ -73,5 +66,17 @@ public class mainLoop {
         // player starting position
         p1.setRoom(rooms[0]);
 
+    }
+
+    public void displayRoom() {
+        System.out.print("Current location:     ");
+        System.out.println(p1.getRoom().getTitle());
+        System.out.println("-------------------------------------");
+        System.out.println(p1.getRoom().getDescription());
+        System.out.println("Available exits: ");
+        for (Enumeration e = p1.getRoom().getExits().elements(); e.hasMoreElements();) {
+            Exit an_exit = (Exit) e.nextElement();
+            System.out.println(an_exit.getFullDirectionName());
+        }
     }
 }
