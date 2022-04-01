@@ -10,7 +10,7 @@ public class mainAdventure {
                                    _|                                                             \s""");
         System.out.println("\u001b[0m");
 
-        // main loop goes here --------------------
-        System.out.println("Use the start command to start your adventure!");
+        mainLoop startGame = new mainLoop();
+        startGame.startLoop();
     }
 }
