@@ -12,5 +12,9 @@ public class mainAdventure {
 
         // main loop goes here --------------------
         System.out.println("Use the start command to start your adventure!");
+//        Room a = new Room();
+//        Room b = new Room();
+//        a.viewRoomItems();
+//        b.viewRoomThings();
     }
 }
