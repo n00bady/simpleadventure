@@ -25,16 +25,12 @@ public class mainLoop {
             // displaying rooms
             displayRoom();
 
-            // get player input this should be a separate method
-            String cmd = input.next();
+            // get player input
+            String cmd = input.nextLine();
             cmd = cmd.toUpperCase();
-            System.out.println("You chose to go " + cmd);
-            for (Enumeration e = p1.getRoom().getExits().elements(); e.hasMoreElements();) {
-                Exit an_exit = (Exit) e.nextElement();
-                if ((an_exit.getFullDirectionName().compareTo(cmd) == 0) || an_exit.getShortDirectionName().compareTo(cmd) == 0) {
-                    p1.setRoom(an_exit.getLeadsTo());
-                }
-            }
+            System.out.println(cmd);
+            playerInput(cmd);
+
             // winning condition
             if (p1.getRoom() == rooms[2]) {
                 System.out.println("Congrats you found the exit!");
@@ -84,36 +80,41 @@ public class mainLoop {
     }
 
     //Player input
-    public void playerInput() {
+    public void playerInput(String cmd) {
         try {
-            Exit testing = new Exit();
-
-            String cmd = null;
-            String test = testing.getFullDirectionName();
+            // verb
             String command = cmd.split(" ")[0];
+            // noun
             String selection = cmd.split(" ")[1];
             System.out.println("Used command: " + command);
             System.out.println("Selection: " + selection);
             System.out.println();
-            System.out.println(test);
 
             switch (command) {
                 case "GO":
                     System.out.println("Go Command selected.");
-                    if (selection.equals(test)) {
-                        System.out.println("Going North");
+                    for (Enumeration e = p1.getRoom().getExits().elements(); e.hasMoreElements();) {
+                        Exit an_exit = (Exit) e.nextElement();
+                        if ((an_exit.getFullDirectionName().compareTo(selection) == 0) ||
+                                an_exit.getShortDirectionName().compareTo(selection) == 0) {
+                            p1.setRoom(an_exit.getLeadsTo());
+                        }
                     }
                     break;
                 case "TAKE":
+                    // add item to inventory
+                    //p1.inventory.add(selection);
                     break;
                 case "DROP":
+                    // drop item from inventory
+                    //p1.inventory.remove(selection);
                     break;
                 default:
                     System.out.println("Command " + command + " is not valid.");
                     break;
             }
         } catch (Exception ArrayIndexOutOfBounds) {
-            System.out.println("Wrong input. The command must be like the examples (GO NORTH, TAKE KEY, etc)");
+            System.err.println("Wrong input. The command must be like the examples (GO NORTH, TAKE KEY, etc)");
         }
     }
 
