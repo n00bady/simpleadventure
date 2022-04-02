@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.List;
+
 public class Player {
     // This is the player class anything related to player goes here
     // TODO: Need to have:
@@ -9,6 +12,7 @@ public class Player {
     private String name;
     private int HP;
     private Room location = null;
+    public List<String> inventory = new ArrayList<String>(); //inventory ArrayList
 
     // Blank constructor
     public Player() {
