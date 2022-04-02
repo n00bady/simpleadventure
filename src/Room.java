@@ -18,6 +18,8 @@ public class Room {
         title = "";
         description = "";
         exits = new Vector();
+        items = new Vector();
+        things = new Vector();
 
     }
 
@@ -26,6 +28,8 @@ public class Room {
         title = t;
         description = "";
         exits = new Vector();
+        items = new Vector();
+        things = new Vector();
     }
 
     // Full constructor
@@ -33,6 +37,8 @@ public class Room {
         title = t;
         description = d;
         exits = new Vector();
+        items = new Vector();
+        things = new Vector();
     }
 
     // Set title
