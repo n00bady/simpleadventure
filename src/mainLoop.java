@@ -88,6 +88,7 @@ public class mainLoop {
         try {
             Exit testing = new Exit();
 
+            String cmd = null;
             String test = testing.getFullDirectionName();
             String command = cmd.split(" ")[0];
             String selection = cmd.split(" ")[1];
@@ -104,10 +105,8 @@ public class mainLoop {
                     }
                     break;
                 case "TAKE":
-                    p1.inventory.add(selection);
                     break;
                 case "DROP":
-                    p1.inventory.remove(selection);
                     break;
                 default:
                     System.out.println("Command " + command + " is not valid.");
