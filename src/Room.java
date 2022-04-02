@@ -10,20 +10,17 @@ public class Room {
     private String title;
     private String description;
     private Vector exits;
-
-    private ArrayList<Item> RoomItems;
-    private ArrayList<Thing> RoomThings;
-    private int numberOfItems;
-    private int numberOfThings;
+    private Vector items;
+    private Vector things;
 
     // Blank constructor
     public Room() {
         title = "";
         description = "";
         exits = new Vector();
+        items = new Vector();
+        things = new Vector();
 
-        RoomItems = new ArrayList<>();
-        RoomThings = new ArrayList<>();
     }
 
     // Title only constructor
@@ -31,6 +28,8 @@ public class Room {
         title = t;
         description = "";
         exits = new Vector();
+        items = new Vector();
+        things = new Vector();
     }
 
     // Full constructor
@@ -38,60 +37,9 @@ public class Room {
         title = t;
         description = d;
         exits = new Vector();
+        items = new Vector();
+        things = new Vector();
     }
-
-
-
-    public ArrayList<Item>  getRoomItems() {
-        return RoomItems;
-    }
-
-
-    public void setRoomItems(ArrayList<Item> roomItems) {
-        this.RoomItems = roomItems;
-    }
-
-    public void addObject(Item item){
-        RoomItems.add(item);
-    }
-
-    public void dropObject(Item item){
-        RoomItems.remove(item);
-    }
-
-
-
-
-    public ArrayList<Thing>  getRoomThings() {
-        return RoomThings;
-    }
-
-
-    public void setRoomThings(ArrayList<Thing> roomThings) {
-        this.RoomThings = roomThings;
-    }
-
-    public void addObject(Thing thing){
-        RoomThings.add(thing);
-    }
-
-    public void dropObject(Thing thing){
-        RoomThings.remove(thing);
-    }
-
-
-
-    public int getNumberOfItems() {
-        numberOfItems = RoomItems.size();
-        return numberOfItems;
-    }
-
-    public int getNumberOfThings() {
-        numberOfThings = RoomThings.size();
-        return numberOfThings;
-    }
-
-
 
     // Set title
     public void setTitle(String roomTitle) {
@@ -130,39 +78,38 @@ public class Room {
         return (Vector) exits.clone();
     }
 
+    // add an item
+    public void addItem(Item i) {
+        items.addElement(i);
+    }
 
-
-
-    public void viewRoomItems() {
-        System.out.println("Room Items:");
-        System.out.println();
-        if(RoomItems.size()==0)
-            System.out.println("No Items in Room");
-        else {
-            for(int i = 0 ; i < RoomItems.size(); i++)
-                System.out.println(i + "  " + RoomItems.get(i));
+    // remove an item
+    public void removeItem(Item i) {
+        if (items.contains(i)) {
+            items.removeElement(i);
         }
-        System.out.println();
     }
 
-    public void viewRoomThings() {
-        System.out.println("Room Things:");
-        System.out.println();
-        if(RoomThings.size()==0)
-            System.out.println("No Things in Room");
-        else {
-            for(int i = 0 ; i < RoomThings.size(); i++)
-                System.out.println(i + "  " + RoomThings.get(i));
+    // return vector items
+    public Vector getItems() {
+        return (Vector) items.clone();
+    }
+
+    // add an item
+    public void addThing(Thing t) {
+        things.addElement(t);
+    }
+
+    // remove an item
+    public void removeThing(Thing t) {
+        if (things.contains(t)) {
+            things.removeElement(t);
         }
-        System.out.println();
     }
 
-
-    @Override
-    public String toString() {
-        return "Room [Name=" + title + ", Description=" + description + ", Items=" + RoomItems
-                + ", Things=" + RoomThings + ", numberOfItems=" + getNumberOfItems() + ", numberOfThings=" + getNumberOfThings() + "]";
+    // return vector items
+    public Vector getThings() {
+        return (Vector) things.clone();
     }
-
 
 }

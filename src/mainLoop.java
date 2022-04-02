@@ -58,6 +58,11 @@ public class mainLoop {
         rooms[1].addExit(new Exit(Exit.EAST, rooms[2]));
         // last room doesn't have any exits
 
+        // add items in rooms
+        rooms[0].addItem(new Item("Key", "A small shiny key."));
+        // add things in rooms
+        rooms[1].addThing(new Thing("Door", "A big wooden door."));
+
         // player starting position
         p1.setRoom(rooms[0]);
 
@@ -76,6 +81,17 @@ public class mainLoop {
         for (Enumeration e = p1.getRoom().getExits().elements(); e.hasMoreElements();) {
             Exit an_exit = (Exit) e.nextElement();
             System.out.println(an_exit.getFullDirectionName());
+        }
+        // just for testing purposes ---
+        System.out.println("Available items: ");
+        for (Enumeration i = p1.getRoom().getItems().elements(); i.hasMoreElements();) {
+            Item an_item = (Item) i.nextElement();
+            System.out.println(an_item.getName());
+        }
+        System.out.println("Available things: ");
+        for (Enumeration t = p1.getRoom().getThings().elements(); t.hasMoreElements();) {
+            Thing a_thing = (Thing) t.nextElement();
+            System.out.println(a_thing.getName());
         }
     }
 
