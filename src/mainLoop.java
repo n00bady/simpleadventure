@@ -82,4 +82,41 @@ public class mainLoop {
             System.out.println(an_exit.getFullDirectionName());
         }
     }
+
+    //Player input
+    public void playerInput() {
+        try {
+            Exit testing = new Exit();
+
+            String test = testing.getFullDirectionName();
+            String command = cmd.split(" ")[0];
+            String selection = cmd.split(" ")[1];
+            System.out.println("Used command: " + command);
+            System.out.println("Selection: " + selection);
+            System.out.println();
+            System.out.println(test);
+
+            switch (command) {
+                case "GO":
+                    System.out.println("Go Command selected.");
+                    if (selection.equals(test)) {
+                        System.out.println("Going North");
+                    }
+                    break;
+                case "TAKE":
+                    p1.inventory.add(selection);
+                    break;
+                case "DROP":
+                    p1.inventory.remove(selection);
+                    break;
+                default:
+                    System.out.println("Command " + command + " is not valid.");
+                    break;
+            }
+        } catch (Exception ArrayIndexOutOfBounds) {
+            System.out.println("Wrong input. The command must be like the examples (GO NORTH, TAKE KEY, etc)");
+        }
+    }
+
+
 }
