@@ -12,7 +12,7 @@ public class Player {
     private String name;
     private int HP;
     private Room location = null;
-    public List<String> inventory = new ArrayList<String>(); //inventory ArrayList
+    private List<String> inventory = new ArrayList<String>(); //inventory ArrayList
 
     // Blank constructor
     public Player() {
@@ -74,4 +74,20 @@ public class Player {
     public void decreaseHP(int damage) {
         HP = HP - damage;
     }
+
+    // Add inventory items
+    public void addInvItems(String inv) {
+        inventory.add(inv);
+    }
+
+    // Remove inventory items
+    public void removeInvItems(String inv) {
+        inventory.remove(inv);
+    }
+
+    // Get inventory items
+    public ArrayList<String>  getInvItems() {
+        return (ArrayList<String>)inventory;
+    }
+
 }

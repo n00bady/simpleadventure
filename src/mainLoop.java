@@ -104,11 +104,11 @@ public class mainLoop {
                     break;
                 case "TAKE":
                     // add item to inventory
-                            p1.inventory.add(selection);
+                            p1.addInvItems(selection);
                     break;
                 case "DROP":
                     // drop item from inventory
-                            p1.inventory.remove(selection);
+                            p1.removeInvItems(selection);
                     break;
                 case "LOOK":
                         if (selection.equals("AROUND")) {
@@ -122,7 +122,7 @@ public class mainLoop {
                             catch(Exception e){}
                         }
                         if (selection.equals("INV") || selection.equals("INVENTORY")){
-                            System.out.println("Inventory: " + p1.inventory);
+                            System.out.println("Inventory: " + p1.getInvItems());
 
                             System.out.println("\u001B[38;5;199mPress Enter key to return in exploration\u001b[0m");
                             try{System.in.read();}
