@@ -56,7 +56,8 @@ public class mainLoop {
         rooms[0].addExit(new Exit(Exit.NORTH, rooms[1]));
         // second room exits
         rooms[1].addExit(new Exit(Exit.SOUTH, rooms[0]));
-        rooms[1].addExit(new Exit(Exit.EAST, rooms[2]));
+        rooms[1].addDoor(new Door(new Exit(Exit.EAST, rooms[2])));
+        //rooms[1].addExit(new Exit(Exit.EAST, rooms[2]));
         // last room doesn't have any exits
 
         // add items in rooms
@@ -156,6 +157,12 @@ public class mainLoop {
                             try{System.in.read();}
                             catch(Exception e){}
                         }
+                    break;
+                case "INTERACT":
+                    if (selection.equals("DOOR") && p1.getRoom().getDoor().open() == null) {
+                        System.out.println("You opend and go through the door.");
+                        p1.setRoom(p1.getRoom().getDoor().getExit().getLeadsTo());
+                    }
                     break;
                 default:
                     System.out.println("Command " + command + " is not valid.");
