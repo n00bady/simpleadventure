@@ -1,6 +1,7 @@
 import java.util.Enumeration;
 import java.util.Scanner;
 
+
 public class mainLoop {
     // TODO: Need to separate possibly player input on it's own method also
     //      need to support verbs (parser?) for actions like go, look, pickup etc...
@@ -102,13 +103,13 @@ public class mainLoop {
             String command = cmd.split(" ")[0];
             // noun
             String selection = cmd.split(" ")[1];
-            System.out.println("Used command: " + command);
-            System.out.println("Selection: " + selection);
+            //System.out.println("Used command: " + command);
+            //System.out.println("Selection: " + selection);
             System.out.println();
 
             switch (command) {
                 case "GO":
-                    System.out.println("Go Command selected.");
+                    //System.out.println("Go Command selected.");
                     for (Enumeration e = p1.getRoom().getExits().elements(); e.hasMoreElements();) {
                         Exit an_exit = (Exit) e.nextElement();
                         if ((an_exit.getFullDirectionName().compareTo(selection) == 0) ||
@@ -119,11 +120,28 @@ public class mainLoop {
                     break;
                 case "TAKE":
                     // add item to inventory
-                    //p1.inventory.add(selection);
+                            p1.addInvItems(selection);
                     break;
                 case "DROP":
                     // drop item from inventory
-                    //p1.inventory.remove(selection);
+                            p1.removeInvItems(selection);
+                    break;
+                case "LOOK":
+                        if (selection.equals("AROUND")) {
+                            System.out.println("\u001B[33mCurrent Room xD. Looking for details...\u001b[0m\n");
+                            Thread.sleep(2500);
+                            System.out.println("\u001B[33mThe room is empty.\u001b[0m");
+                            System.out.println("\u001B[38;5;199mPress Enter key to return in exploration\u001b[0m");
+                            try{System.in.read();}
+                            catch(Exception e){}
+                        }
+                        if (selection.equals("INV") || selection.equals("INVENTORY")){
+                            System.out.println("Inventory: " + p1.getInvItems());
+
+                            System.out.println("\u001B[38;5;199mPress Enter key to return in exploration\u001b[0m");
+                            try{System.in.read();}
+                            catch(Exception e){}
+                        }
                     break;
                 default:
                     System.out.println("Command " + command + " is not valid.");

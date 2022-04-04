@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.List;
+
 public class Player {
     // This is the player class anything related to player goes here
     // TODO: Need to have:
@@ -9,6 +12,7 @@ public class Player {
     private String name;
     private int HP;
     private Room location = null;
+    private List<String> inventory = new ArrayList<String>(); //inventory ArrayList
 
     // Blank constructor
     public Player() {
@@ -70,4 +74,20 @@ public class Player {
     public void decreaseHP(int damage) {
         HP = HP - damage;
     }
+
+    // Add inventory items
+    public void addInvItems(String inv) {
+        inventory.add(inv);
+    }
+
+    // Remove inventory items
+    public void removeInvItems(String inv) {
+        inventory.remove(inv);
+    }
+
+    // Get inventory items
+    public ArrayList<String>  getInvItems() {
+        return (ArrayList<String>)inventory;
+    }
+
 }
