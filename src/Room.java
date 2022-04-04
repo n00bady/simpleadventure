@@ -12,6 +12,7 @@ public class Room {
     private Vector exits;
     private Vector items;
     private Vector things;
+    private Door door;
 
     // Blank constructor
     public Room() {
@@ -112,4 +113,13 @@ public class Room {
         return (Vector) things.clone();
     }
 
+    // add Door
+    public void addDoor(Door doo) {
+        door = doo;
+    }
+
+    // get Door
+    public Door getDoor() {
+        return (Door) door;
+    }
 }
