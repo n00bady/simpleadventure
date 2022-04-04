@@ -120,6 +120,15 @@ public class mainLoop {
                     break;
                 case "TAKE":
                     // add item to inventory
+                    for (Enumeration i = p1.getRoom().getItems().elements(); i.hasMoreElements();) {
+                        Item an_item = (Item) i.nextElement();
+                        if ((an_item.getName().compareToIgnoreCase(selection) == 0)) {
+                            p1.addInvItems(an_item);
+                            p1.getRoom().removeItem(an_item);
+                            System.out.println("*Item " + selection + " added to inventory*");
+                            Thread.sleep(1500);
+                        }
+                    }
                     break;
                 case "DROP":
                     // drop item from inventory
