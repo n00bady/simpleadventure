@@ -114,9 +114,7 @@ public class mainLoop {
                         if (selection.equals("AROUND")) {
                             System.out.println("\u001B[33mCurrent Room xD. Looking for details...\u001b[0m\n");
                             Thread.sleep(2500);
-                            System.out.println("\u001B[33mThe room is empty. But...\u001b[0m");
-                            Thread.sleep(1000);
-                            System.out.println("\u001B[33mYou can take everything you want. xD\u001b[0m");
+                            System.out.println("\u001B[33mThe room is empty.\u001b[0m");
                             System.out.println("\u001B[38;5;199mPress Enter key to return in exploration\u001b[0m");
                             try{System.in.read();}
                             catch(Exception e){}
