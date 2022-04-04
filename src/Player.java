@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Vector;
 
 public class Player {
     // This is the player class anything related to player goes here
@@ -12,7 +13,7 @@ public class Player {
     private String name;
     private int HP;
     private Room location = null;
-    private List<String> inventory = new ArrayList<String>(); //inventory ArrayList
+    private List<Item> inventory = new ArrayList<Item>(); //inventory ArrayList
 
     // Blank constructor
     public Player() {
@@ -76,18 +77,18 @@ public class Player {
     }
 
     // Add inventory items
-    public void addInvItems(String inv) {
+    public void addInvItems(Item inv) {
         inventory.add(inv);
     }
 
     // Remove inventory items
-    public void removeInvItems(String inv) {
+    public void removeInvItems(Item inv) {
         inventory.remove(inv);
     }
 
     // Get inventory items
-    public ArrayList<String>  getInvItems() {
-        return (ArrayList<String>)inventory;
+    public ArrayList<Item>  getInvItems() {
+        return (ArrayList<Item>)inventory;
     }
 
 }
