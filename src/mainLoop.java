@@ -27,9 +27,10 @@ public class mainLoop {
             displayRoom();
 
             // get player input
+            System.out.print(">> ");
             String cmd = input.nextLine();
             cmd = cmd.toUpperCase();
-            System.out.println(cmd);
+            //System.out.println(cmd);
             playerInput(cmd);
 
             // winning condition
@@ -74,10 +75,11 @@ public class mainLoop {
 
     // displays the current room title, description and exits
     public void displayRoom() {
-        System.out.println("-------------------------------------");
+        System.out.println();
+        System.out.println("----------------------------------------");
         System.out.print("Current location:     ");
         System.out.println(p1.getRoom().getTitle());
-        System.out.println("-------------------------------------");
+        System.out.println("----------------------------------------");
         System.out.println(p1.getRoom().getDescription());
         // this could be a separate method so the player can
         // simply request the exits on their own and not have to get the whole
@@ -105,6 +107,7 @@ public class mainLoop {
             Thing a_thing = (Thing) t.nextElement();
             System.out.println(a_thing.getName());
         }
+        System.out.println(">--------------------------------------<");
     }
 
     //Player input
@@ -177,6 +180,7 @@ public class mainLoop {
                                 System.out.println("The door is locked!");
                                 System.out.println("It requires: " + a_door.getRequires().getName());
                                 System.out.println(("Checking inventory for required key."));
+                                Thread.sleep(1500);
                                 // probably there is a better way to do this...
                                 if (p1.getInvItems().contains(a_door.getRequires())) {
                                     System.out.println("You used the " + a_door.getRequires().getName() + " to unlock the door.");
@@ -201,6 +205,4 @@ public class mainLoop {
             //System.err.println("Wrong input. The command must be like the examples (GO NORTH, TAKE KEY, etc)");   //temporarily disabled
         }
     }
-
-
 }
