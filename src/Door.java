@@ -43,6 +43,20 @@ public class Door {
         return exit.getLeadsTo();
     }
 
+    // get Item that required to unlock the door
+    public Item getRequires() {
+        return (Item) requires;
+    }
+
+    // unlock the door
+    public boolean unlock(Item key) {
+        if (key == requires) {
+            locked = false;
+            return locked;
+        }
+        return locked;
+    }
+
     // get exit
     public Exit getExit() {
         return (Exit) exit;
