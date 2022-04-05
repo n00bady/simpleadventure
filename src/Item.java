@@ -27,7 +27,7 @@ public class Item {
 
     @Override
     public String toString() {
-        return "Item name=" + name + ", description=" + desc ;
+        return "\u001B[33mItem name= \u001b[0m" + name + "\u001B[33m, description= \u001b[0m" + desc ;
     }
 
 

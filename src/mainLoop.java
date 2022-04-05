@@ -78,18 +78,18 @@ public class mainLoop {
         // this could be a separate method so the player can
         // simply request the exits on their own and not have to get the whole
         // displayRoom again
-        System.out.println("Available exits: ");
+        System.out.println("\u001B[33mAvailable exits: \u001b[0m");
         for (Enumeration e = p1.getRoom().getExits().elements(); e.hasMoreElements();) {
             Exit an_exit = (Exit) e.nextElement();
             System.out.println(an_exit.getFullDirectionName());
         }
         // just for testing purposes ---
-        System.out.println("Available items: ");
+        System.out.println("\u001B[33mAvailable items:\u001b[0m");
         for (Enumeration i = p1.getRoom().getItems().elements(); i.hasMoreElements();) {
             Item an_item = (Item) i.nextElement();
             System.out.println(an_item.getName());
         }
-        System.out.println("Available things: ");
+        System.out.println("\u001B[33mAvailable things: \u001b[0m");
         for (Enumeration t = p1.getRoom().getThings().elements(); t.hasMoreElements();) {
             Thing a_thing = (Thing) t.nextElement();
             System.out.println(a_thing.getName());
@@ -110,7 +110,7 @@ public class mainLoop {
             switch (command) {
                 case "GO":
                     //System.out.println("Go Command selected.");
-                    for (Enumeration e = p1.getRoom().getExits().elements(); e.hasMoreElements();) {
+                    for (Enumeration e = p1.getRoom().getExits().elements(); e.hasMoreElements(); ) {
                         Exit an_exit = (Exit) e.nextElement();
                         if ((an_exit.getFullDirectionName().compareTo(selection) == 0) ||
                                 an_exit.getShortDirectionName().compareTo(selection) == 0) {
@@ -120,15 +120,29 @@ public class mainLoop {
                     break;
                 case "TAKE":
                     // add item to inventory
-                            p1.addInvItems(selection);
+                    for (Enumeration i = p1.getRoom().getItems().elements(); i.hasMoreElements(); ) {
+                        Item an_item = (Item) i.nextElement();
+                        if ((an_item.getName().compareToIgnoreCase(selection) == 0)) {
+                            p1.addInvItems(an_item);
+                            p1.getRoom().removeItem(an_item);
+                            System.out.println("\u001B[33m*Item\u001b[0m " + selection + "\u001B[33m added to inventory*\u001b[0m");
+                            Thread.sleep(1000);
+                        }
+                    }
                     break;
                 case "DROP":
                     // drop item from inventory
-                            p1.removeInvItems(selection);
+                    for (Item it : p1.getInvItems()) {
+                        p1.removeInvItems(it);
+                        p1.getRoom().addItem(it);
+                        System.out.println("*\u001B[33mItem removed from inventory*\u001b[0m");
+                        Thread.sleep(1000);
+                    }
+
                     break;
                 case "LOOK":
                         if (selection.equals("AROUND")) {
-                            System.out.println("\u001B[33mCurrent Room xD. Looking for details...\u001b[0m\n");
+                            System.out.println("\u001B[33mLooking around for details...\u001b[0m\n");
                             Thread.sleep(2500);
                             System.out.println("\u001B[33mThe room is empty.\u001b[0m");
                             System.out.println("\u001B[38;5;199mPress Enter key to return in exploration\u001b[0m");
@@ -136,7 +150,7 @@ public class mainLoop {
                             catch(Exception e){}
                         }
                         if (selection.equals("INV") || selection.equals("INVENTORY")){
-                            System.out.println("Inventory: " + p1.getInvItems());
+                            System.out.println(p1.getInvItems());
 
                             System.out.println("\u001B[38;5;199mPress Enter key to return in exploration\u001b[0m");
                             try{System.in.read();}
@@ -148,7 +162,7 @@ public class mainLoop {
                     break;
             }
         } catch (Exception ArrayIndexOutOfBounds) {
-            System.err.println("Wrong input. The command must be like the examples (GO NORTH, TAKE KEY, etc)");
+            //System.err.println("Wrong input. The command must be like the examples (GO NORTH, TAKE KEY, etc)");   //temporarily disabled
         }
     }
 
