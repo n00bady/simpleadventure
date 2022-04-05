@@ -13,7 +13,8 @@ public class Player {
     private String name;
     private int HP;
     private Room location = null;
-    private List<Item> inventory = new ArrayList<Item>(); //inventory ArrayList
+    private List<Item> inventory = new ArrayList<>(); //inventory ArrayList
+    //private Vector inventory;
 
     // Blank constructor
     public Player() {
@@ -83,11 +84,14 @@ public class Player {
 
     // Remove inventory items
     public void removeInvItems(Item inv) {
-        inventory.remove(inv);
+        if (inventory.contains(inv)) {
+            inventory.remove(inv);
+        }
     }
 
     // Get inventory items
-    public ArrayList<Item>  getInvItems() {
+    public ArrayList<Item> getInvItems() {
+        //return (Vector)inventory;
         return (ArrayList<Item>)inventory;
     }
 
