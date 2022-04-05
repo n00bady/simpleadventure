@@ -12,7 +12,7 @@ public class Room {
     private Vector exits;
     private Vector items;
     private Vector things;
-    private Door door;
+    private Vector doors;
 
     // Blank constructor
     public Room() {
@@ -114,12 +114,12 @@ public class Room {
     }
 
     // add Door
-    public void addDoor(Door doo) {
-        door = doo;
+    public void addDoor(Door D) {
+        doors.addElement(D);
     }
 
     // get Door
-    public Door getDoor() {
-        return (Door) door;
+    public Vector getDoor() {
+        return (Vector) doors.clone();
     }
 }
