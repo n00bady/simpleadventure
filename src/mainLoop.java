@@ -74,6 +74,7 @@ public class mainLoop {
 
     // displays the current room title, description and exits
     public void displayRoom() {
+        System.out.println("-------------------------------------");
         System.out.print("Current location:     ");
         System.out.println(p1.getRoom().getTitle());
         System.out.println("-------------------------------------");
@@ -86,12 +87,19 @@ public class mainLoop {
             Exit an_exit = (Exit) e.nextElement();
             System.out.println(an_exit.getFullDirectionName());
         }
+        System.out.println("\u001B[33mAvailable doors: \u001b[0m");
+        for (Enumeration d = p1.getRoom().getDoors().elements(); d.hasMoreElements();) {
+            Door a_door = (Door) d.nextElement();
+            System.out.print(a_door.getName());
+        }
+        System.out.println();
         // just for testing purposes ---
         System.out.println("\u001B[33mAvailable items:\u001b[0m");
         for (Enumeration i = p1.getRoom().getItems().elements(); i.hasMoreElements();) {
             Item an_item = (Item) i.nextElement();
             System.out.println(an_item.getName());
         }
+        System.out.println();
         System.out.println("\u001B[33mAvailable things: \u001b[0m");
         for (Enumeration t = p1.getRoom().getThings().elements(); t.hasMoreElements();) {
             Thing a_thing = (Thing) t.nextElement();
@@ -162,6 +170,23 @@ public class mainLoop {
                     break;
                 case "USE":
                     // use things or items, open doors etc...
+                    for (Enumeration d = p1.getRoom().getDoors().elements(); d.hasMoreElements();) {
+                        Door a_door = (Door) d.nextElement();
+                        if (a_door.getName().compareToIgnoreCase(selection) == 0) {
+                            if (a_door.open() == null) {
+                                System.out.println("The door is locked!");
+                                System.out.println("It requires: " + a_door.getRequires().getName());
+                                System.out.println(("Checking inventory for required key."));
+                                // probably there is a better way to do this...
+                                if (p1.getInvItems().contains(a_door.getRequires())) {
+                                    System.out.println("You use the " + a_door.getRequires().getName() + " to unlock the door");
+                                    a_door.unlock(a_door.getRequires());
+                                }
+                            } else {
+                                p1.setRoom(a_door.getExit().getLeadsTo());
+                            }
+                        }
+                    }
                     break;
                 case "INTERACT":
                     // maybe we can use this for some other stuff...
