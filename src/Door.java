@@ -38,9 +38,9 @@ public class Door {
     // open door
     public Room open() {
         if (locked) {
-            return exit.getLeadsTo();
+            return null;
         }
-        return null;
+        return exit.getLeadsTo();
     }
 
     // get exit
