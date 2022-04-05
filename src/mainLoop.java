@@ -152,7 +152,6 @@ public class mainLoop {
                         System.out.println("*\u001B[33mItem removed from inventory*\u001b[0m");
                         Thread.sleep(1000);
                     }
-
                     break;
                 case "LOOK":
                         if (selection.equals("AROUND")) {
@@ -202,7 +201,7 @@ public class mainLoop {
                     break;
             }
         } catch (Exception ArrayIndexOutOfBounds) {
-            //System.err.println("Wrong input. The command must be like the examples (GO NORTH, TAKE KEY, etc)");   //temporarily disabled
+            System.err.println("Wrong input. The command must be like the examples (GO NORTH, TAKE KEY, etc)");   //temporarily disabled
         }
     }
 }
