@@ -35,6 +35,11 @@ public class Door {
         requires = req;
     }
 
+    // get name
+    public String getName() {
+        return name;
+    }
+
     // open door
     public Room open() {
         if (locked) {
