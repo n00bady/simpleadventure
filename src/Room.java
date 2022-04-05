@@ -12,6 +12,7 @@ public class Room {
     private Vector exits;
     private Vector items;
     private Vector things;
+    private Vector doors;
 
     // Blank constructor
     public Room() {
@@ -20,6 +21,7 @@ public class Room {
         exits = new Vector();
         items = new Vector();
         things = new Vector();
+        doors = new Vector();
 
     }
 
@@ -30,6 +32,7 @@ public class Room {
         exits = new Vector();
         items = new Vector();
         things = new Vector();
+        doors = new Vector();
     }
 
     // Full constructor
@@ -39,6 +42,7 @@ public class Room {
         exits = new Vector();
         items = new Vector();
         things = new Vector();
+        doors = new Vector();
     }
 
     // Set title
@@ -112,4 +116,13 @@ public class Room {
         return (Vector) things.clone();
     }
 
+    // add Door
+    public void addDoor(Door D) {
+        doors.addElement(D);
+    }
+
+    // get Door
+    public Vector getDoors() {
+        return (Vector) doors.clone();
+    }
 }
