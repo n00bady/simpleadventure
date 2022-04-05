@@ -179,10 +179,12 @@ public class mainLoop {
                                 System.out.println(("Checking inventory for required key."));
                                 // probably there is a better way to do this...
                                 if (p1.getInvItems().contains(a_door.getRequires())) {
-                                    System.out.println("You use the " + a_door.getRequires().getName() + " to unlock the door");
-                                    a_door.unlock(a_door.getRequires());
+                                    System.out.println("You used the " + a_door.getRequires().getName() + " to unlock the door.");
+                                    a_door.unlock();
+                                    p1.removeInvItems(a_door.getRequires()); // item is removed from the inventory after use
                                 }
                             } else {
+                                // just go through if it's unlocked
                                 p1.setRoom(a_door.getExit().getLeadsTo());
                             }
                         }
