@@ -46,24 +46,26 @@ public class mainLoop {
 
     // In theory, we can have multiple world and initialize whichever we want.
     public void initWorld() {
+
         // Room creation
         rooms = new Room[3];
         rooms[0] = new Room("Starting room.", "You start here.");
         rooms[1] = new Room("Second room.", "An empty room.");
         rooms[2] = new Room("Exit room", "You found the exit.");
 
-        // start room exits
-        rooms[0].addExit(new Exit(Exit.NORTH, rooms[1]));
-        // second room exits
-        rooms[1].addExit(new Exit(Exit.SOUTH, rooms[0]));
-        rooms[1].addDoor(new Door(new Exit(Exit.EAST, rooms[2])));
-        //rooms[1].addExit(new Exit(Exit.EAST, rooms[2]));
+        // Keys creation
+        Item key1 = new Item ("Key", "An small shiny key.");
+        // Doors creation
+        Door door1 = new Door("East Door", "An simple door.", new Exit(Exit.EAST, rooms[2]), true, key1);
+
+        // Exits for each room if they have a door then the exit is added in the door.(a little stupid way of doing it)
+        rooms[0].addExit(new Exit(Exit.NORTH, rooms[1])); // start room exits
+        rooms[1].addExit(new Exit(Exit.SOUTH, rooms[0])); // second room exits
+        rooms[1].addDoor(door1); // the door contains the exit for this place
         // last room doesn't have any exits
 
         // add items in rooms
-        rooms[0].addItem(new Item("Key", "A small shiny key."));
-        // add things in rooms
-        rooms[1].addThing(new Thing("Door", "A big wooden door."));
+        rooms[0].addItem(key1);
 
         // player starting position
         p1.setRoom(rooms[0]);
@@ -103,9 +105,9 @@ public class mainLoop {
             // verb
             String command = cmd.split(" ")[0];
             // noun
-            String selection = cmd.split(" ")[1];
-            //System.out.println("Used command: " + command);
-            //System.out.println("Selection: " + selection);
+            String selection = cmd.split(" ", 2)[1];
+            System.out.println("Used command: " + command);
+            System.out.println("Selection: " + selection);
             System.out.println();
 
             switch (command) {
@@ -158,11 +160,11 @@ public class mainLoop {
                             catch(Exception e){}
                         }
                     break;
+                case "USE":
+                    // use things or items, open doors etc...
+                    break;
                 case "INTERACT":
-                    if (selection.equals("DOOR") && p1.getRoom().getDoor().open() == null) {
-                        System.out.println("You opend and go through the door.");
-                        p1.setRoom(p1.getRoom().getDoor().getExit().getLeadsTo());
-                    }
+                    // maybe we can use this for some other stuff...
                     break;
                 default:
                     System.out.println("Command " + command + " is not valid.");
