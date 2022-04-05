@@ -54,12 +54,8 @@ public class Door {
     }
 
     // unlock the door
-    public boolean unlock(Item key) {
-        if (key == requires) {
-            locked = false;
-            return locked;
-        }
-        return locked;
+    public void unlock() {
+        locked = false;
     }
 
     // get exit
