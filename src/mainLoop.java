@@ -147,10 +147,12 @@ public class mainLoop {
                 case "DROP":
                     // drop item from inventory
                     for (Item it : p1.getInvItems()) {
-                        p1.removeInvItems(it);
-                        p1.getRoom().addItem(it);
-                        System.out.println("*\u001B[33mItem removed from inventory*\u001b[0m");
-                        Thread.sleep(1000);
+                        if ((it.getName().compareToIgnoreCase(selection) == 0)) {
+                            p1.removeInvItems(it);
+                            p1.getRoom().addItem(it);
+                            System.out.println("*\u001B[33mItem removed from inventory*\u001b[0m");
+                            Thread.sleep(1000);
+                        }
                     }
                     break;
                 case "LOOK":
