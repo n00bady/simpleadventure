@@ -67,6 +67,8 @@ public class mainLoop {
 
         // add items in rooms
         rooms[0].addItem(key1);
+        rooms[0].addItem(new Item("Teddy Bear", "A small cute teddy bear."));
+        rooms[0].addThing(new Thing("Broken Statue", "A very old broken statue of some long forgotten deity."));
 
         // player starting position
         p1.setRoom(rooms[0]);
