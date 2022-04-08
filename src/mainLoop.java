@@ -25,7 +25,10 @@ public class mainLoop {
         do {
             // displaying rooms
             displayRoom();
-
+            // displaying exits and doors
+            displayExits();
+            // displaing items and things
+            displayItemsAndThings();
             // get player input
             playerInput();
 
@@ -85,41 +88,48 @@ public class mainLoop {
     // displays the current room title, description and exits
     public void displayRoom() {
         System.out.println();
-        System.out.println("----------------------------------------");
-        System.out.print("Current location:     ");
+        System.out.println(">-------------------Current location-------------------<");
         System.out.println(p1.getRoom().getTitle());
-        System.out.println("----------------------------------------");
+        System.out.println("--------------------Description-------------------------");
         System.out.println(p1.getRoom().getDescription());
-        // this could be a separate method so the player can
-        // simply request the exits on their own and not have to get the whole
-        // displayRoom again
+        System.out.println(">------------------------------------------------------<");
+    }
+
+    // displaying the exits & doors of the current room
+    public void displayExits() {
+        //System.out.println(">------------------------------------------------------<");
         System.out.println("\u001B[33mAvailable exits: \u001b[0m");
         for (Enumeration e = p1.getRoom().getExits().elements(); e.hasMoreElements();) {
             Exit an_exit = (Exit) e.nextElement();
-            System.out.println(an_exit.getFullDirectionName());
+            System.out.println("\t" + an_exit.getFullDirectionName());
         }
+        System.out.println();
         System.out.println("\u001B[33mAvailable doors: \u001b[0m");
         for (Enumeration d = p1.getRoom().getDoors().elements(); d.hasMoreElements();) {
             Door a_door = (Door) d.nextElement();
-            System.out.print(a_door.getName());
+            System.out.println("\t" + a_door.getName());
         }
-        System.out.println();
-        // just for testing purposes ---
+        System.out.println(">------------------------------------------------------<");
+    }
+
+    // displaying the Items and Things in the current Room
+    public void displayItemsAndThings() {
+        //System.out.println(">------------------------------------------------------<");
         System.out.println("\u001B[33mAvailable items:\u001b[0m");
         for (Enumeration i = p1.getRoom().getItems().elements(); i.hasMoreElements();) {
             Item an_item = (Item) i.nextElement();
-            System.out.println(an_item.getName());
+            System.out.println("\t" + an_item.getName());
         }
         System.out.println();
         System.out.println("\u001B[33mAvailable things: \u001b[0m");
         for (Enumeration t = p1.getRoom().getThings().elements(); t.hasMoreElements();) {
             Thing a_thing = (Thing) t.nextElement();
-            System.out.println(a_thing.getName());
+            System.out.println("\t" + a_thing.getName());
         }
-        System.out.println(">--------------------------------------<");
+        System.out.println(">------------------------------------------------------<");
     }
 
-    //Player input
+    //Player input & processing
     public void playerInput() {
         boolean success = false;  // probably there is a better way, but this is what I could do...
         Scanner input = new Scanner(System.in);
@@ -129,10 +139,8 @@ public class mainLoop {
         String cmd = input.nextLine();
         cmd = cmd.toUpperCase();
 
-        // verb
-        String command;
-        // noun(s)
-        String selection;
+        String command;     // verb
+        String selection;   // noun(s)
         // make a joiner to join the words after the first, is there any other way to do this easier/faster ?
         // Check if user's input is more than one word
         // if it has more than one word then all the words after the
