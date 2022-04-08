@@ -67,6 +67,8 @@ public class mainLoop {
 
         // add items in rooms
         rooms[0].addItem(key1);
+        rooms[0].addItem(new Item("Teddy Bear", "A small cute teddy bear."));
+        rooms[0].addThing(new Thing("Broken Statue", "A very old broken statue of some long forgotten deity."));
 
         // player starting position
         p1.setRoom(rooms[0]);
@@ -112,6 +114,7 @@ public class mainLoop {
 
     //Player input
     public void playerInput(String cmd) {
+        boolean success = false;
         try {
             // verb
             String command = cmd.split(" ")[0];
@@ -128,9 +131,13 @@ public class mainLoop {
                         Exit an_exit = (Exit) e.nextElement();
                         if ((an_exit.getFullDirectionName().compareTo(selection) == 0) ||
                                 an_exit.getShortDirectionName().compareTo(selection) == 0) {
+                            System.out.println("You move to the " + an_exit.getFullDirectionName() + " room...");
+                            Thread.sleep(1500);
                             p1.setRoom(an_exit.getLeadsTo());
+                            success = true;
                         }
                     }
+                    if (!success) { System.out.println("You can't go that way!"); }
                     break;
                 case "TAKE":
                     // add item to inventory
@@ -141,8 +148,10 @@ public class mainLoop {
                             p1.getRoom().removeItem(an_item);
                             System.out.println("\u001B[33m*Item\u001b[0m " + selection + "\u001B[33m added to inventory*\u001b[0m");
                             Thread.sleep(1000);
+                            success = true;
                         }
                     }
+                    if (!success) { System.out.println("You can't take that!"); }
                     break;
                 case "DROP":
                     // drop item from inventory
