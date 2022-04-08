@@ -1,5 +1,6 @@
 import java.util.Enumeration;
 import java.util.Scanner;
+import java.util.StringJoiner;
 
 public class mainLoop {
     // TODO: More commands, fix the exceptions, seperate the displaying of items/things etc from
@@ -123,19 +124,29 @@ public class mainLoop {
         boolean success = false;  // probably there is a better way, but this is what I could do...
         Scanner input = new Scanner(System.in);
 
+        // scan input from player
         System.out.print(">> ");
         String cmd = input.nextLine();
         cmd = cmd.toUpperCase();
 
         // verb
-        String command = cmd.split(" ")[0];
+        String command;
         // noun(s)
-        String selection = " ";
+        String selection;
+        // make a joiner to join the words after the first, is there any other way to do this easier/faster ?
         // Check if user's input is more than one word
-        // we do this incase there is only a command otherwise we get out of bounds exceptions :P
-        if (cmd.indexOf(" ") > 0) {
-            selection = cmd.split(" ", 2)[1];
+        // if it has more than one word then all the words after the
+        // first and put it in a single string selection
+        StringJoiner joiner = new StringJoiner(" ");
+        String words[] = cmd.split("\\s+");
+        command = words[0];
+        if (words.length > 1) {
+            for (int w=1;w<=(words.length-1);w++) {
+                joiner.add(words[w]);
+            }
         }
+        selection = String.valueOf(joiner);
+        // poor mans debbugger
         System.out.println("Used command: " + command);
         System.out.println("Selection: " + selection);
         System.out.println();
