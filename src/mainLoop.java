@@ -1,3 +1,4 @@
+import javax.swing.*;
 import java.util.Enumeration;
 import java.util.Scanner;
 import java.util.StringJoiner;
@@ -129,6 +130,35 @@ public class mainLoop {
         System.out.println(">------------------------------------------------------<");
     }
 
+    public void displayInventory() {
+        System.out.println("⟔---------------------------------------");
+        System.out.println(p1.getInvItems()); // TODO: Needs a loop to get only each item's name so it looks good.
+        System.out.println("---------------------------------------⟓");
+        System.out.println("\u001B[38;5;199mPress Enter key to return in exploration\u001b[0m");
+        System.out.println();
+        try {
+            System.in.read();
+        } catch (Exception ignored) {
+        }
+    }
+
+    // display description of an item or thing or a doors requirement
+    public void displayDesc(Item item) {
+        System.out.println(item.getName());
+        System.out.print("\t");
+        System.out.println(item.getDesc());
+    }
+    public void  displayDesc(Thing thing) {
+        System.out.println(thing.getName());
+        System.out.print("\t");
+        System.out.println(thing.getDesc());
+    }
+    public void displayDesc(Door door) {
+        System.out.println(door.getName());
+        System.out.print("\t");
+        System.out.print(door.getRequires());
+    }
+
     //Player input & processing
     public void playerInput() {
         boolean success = false;  // probably there is a better way, but this is what I could do...
@@ -211,7 +241,7 @@ public class mainLoop {
                     Thread.sleep(slowdown);
                     break;
                 case "LOOK":
-                    // print all items/things that exist in the room
+                    // TODO: print all items/things that exist in the room
                     if (selection.equals("AROUND")) {
                         System.out.println("\u001B[33mLooking around for details...\u001b[0m\n");
                         Thread.sleep(slowdown * 2);
@@ -224,13 +254,7 @@ public class mainLoop {
                     }
                     // print all items in the player's inventory
                     if (selection.equals("INV") || selection.equals("INVENTORY")) {
-                        System.out.println(p1.getInvItems());
-
-                        System.out.println("\u001B[38;5;199mPress Enter key to return in exploration\u001b[0m");
-                        try {
-                            System.in.read();
-                        } catch (Exception e) {
-                        }
+                        displayInventory();
                     }
                     break;
                 case "USE":
