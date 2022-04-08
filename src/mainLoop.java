@@ -1,12 +1,11 @@
-import javax.swing.*;
 import java.util.Enumeration;
 import java.util.Scanner;
 import java.util.StringJoiner;
 
 public class mainLoop {
-    // TODO: More commands, fix the exceptions, seperate the displaying of items/things etc from
-    //      the displayRoom() method. Add an actual smoll scenario instead of just example cases!
-    //      better selection recognition for playerInput() .
+    // TODO: More commands, fix the exceptions, prettify the displaying of all.
+    //      Add an actual smoll scenario instead of just example cases!
+    //      better selection recognition for playerInput().
 
     private Room rooms[];
     private Player p1 = new Player();
@@ -42,6 +41,8 @@ public class mainLoop {
     }
 
     // In theory, we can have multiple world and initialize whichever we want.
+    // TODO: each world will be it's own class created manually and initWorld() should only
+    //      initialize the world it's been asked too...
     public void initWorld() {
 
         // Room creation
