@@ -1,6 +1,8 @@
 import java.util.Enumeration;
 import java.util.Scanner;
 import java.util.StringJoiner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class mainLoop {
     // TODO: More commands, fix the exceptions, prettify the displaying of all.
@@ -296,8 +298,8 @@ public class mainLoop {
                     break;
             }
         } catch (Exception e) {
-            System.err.println(e);
-            System.err.println("Wrong input. The command must be like the examples (GO NORTH, TAKE KEY, etc)");
+            // I think you log exception something like this...
+            Logger.getLogger("Commnads input.").log(Level.INFO, "An exception in the command's switch occurred: ", e);
         }
         // switch end ---
     }
