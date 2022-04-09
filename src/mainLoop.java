@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.Scanner;
 import java.util.StringJoiner;
@@ -233,7 +234,9 @@ public class mainLoop {
                 case "DROP":
                     // drop item from inventory and add it to the room
                     // No matter how I do it I get a java.util.ConcurrentModificationException here ???
-                    for (Item an_item : p1.getInvItems()) {
+                    // OK if we create a copy of the arraylist we do not get that exception.
+                    ArrayList<Item> inventory = new ArrayList<>(p1.getInvItems());
+                    for (Item an_item : inventory) {
                         if (an_item.getName().compareToIgnoreCase(selection) == 0) {
                             p1.removeInvItems(an_item);
                             p1.getRoom().addItem(an_item);
