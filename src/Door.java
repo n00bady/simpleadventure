@@ -18,9 +18,9 @@ public class Door {
     }
 
     // Partial Constructor
-    public Door(Exit e) {
-        name = "Door";
-        description = "A simple door.";
+    public Door(String n, String d, Exit e) {
+        name = n;
+        description = d;
         exit = e;
         locked = false;
         requires = null;
