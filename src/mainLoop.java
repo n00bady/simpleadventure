@@ -143,7 +143,7 @@ public class mainLoop {
         }
     }
 
-    // display description of an item or thing or a doors requirement
+    // display description Item/Thing/Door
     public void displayDesc(Item item) {
         System.out.println(item.getName());
         System.out.print("\t");
@@ -157,7 +157,7 @@ public class mainLoop {
     public void displayDesc(Door door) {
         System.out.println(door.getName());
         System.out.print("\t");
-        System.out.print(door.getRequires());
+        System.out.print(door.getDesc());
     }
 
     //Player input & processing
@@ -227,7 +227,7 @@ public class mainLoop {
                     break;
                 case "DROP":
                     // drop item from inventory and add it to the room
-                    // No matter how I do it I get an java.util.ConcurrentModificationException here ???
+                    // No matter how I do it I get a java.util.ConcurrentModificationException here ???
                     for (Item an_item : p1.getInvItems()) {
                         if (an_item.getName().compareToIgnoreCase(selection) == 0) {
                             p1.removeInvItems(an_item);
