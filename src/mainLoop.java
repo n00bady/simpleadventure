@@ -25,6 +25,9 @@ public class mainLoop {
 
         // this is the main game loop
         do {
+            // TODO: Only the display room should be printed every loop the rest shoudl be called
+            //      by the player using the appropriate commands.
+
             // displaying rooms
             displayRoom();
             // displaying exits and doors
