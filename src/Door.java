@@ -53,6 +53,11 @@ public class Door {
         return (Item) requires;
     }
 
+    // get Descriptions
+    public String getDesc() {
+        return  (String) description;
+    }
+
     // unlock the door
     public void unlock() {
         locked = false;

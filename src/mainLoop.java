@@ -1,11 +1,14 @@
+import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.Scanner;
 import java.util.StringJoiner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class mainLoop {
-    // TODO: More commands, fix the exceptions, seperate the displaying of items/things etc from
-    //      the displayRoom() method. Add an actual smoll scenario instead of just example cases!
-    //      better selection recognition for playerInput() .
+    // TODO: More commands, fix the exceptions, prettify the displaying of all.
+    //      Add an actual smoll scenario instead of just example cases!
+    //      better selection recognition for playerInput().
 
     private Room rooms[];
     private Player p1 = new Player();
@@ -23,9 +26,15 @@ public class mainLoop {
 
         // this is the main game loop
         do {
+            // TODO: Only the display room should be printed every loop the rest shoudl be called
+            //      by the player using the appropriate commands.
+
             // displaying rooms
             displayRoom();
-
+            // displaying exits and doors
+            displayExits();
+            // displaing items and things
+            displayItemsAndThings();
             // get player input
             playerInput();
 
@@ -38,6 +47,8 @@ public class mainLoop {
     }
 
     // In theory, we can have multiple world and initialize whichever we want.
+    // TODO: each world will be it's own class created manually and initWorld() should only
+    //      initialize the world it's been asked too...
     public void initWorld() {
 
         // Room creation
@@ -85,41 +96,77 @@ public class mainLoop {
     // displays the current room title, description and exits
     public void displayRoom() {
         System.out.println();
-        System.out.println("----------------------------------------");
-        System.out.print("Current location:     ");
+        System.out.println(">-------------------Current location-------------------<");
         System.out.println(p1.getRoom().getTitle());
-        System.out.println("----------------------------------------");
+        System.out.println("--------------------Description-------------------------");
         System.out.println(p1.getRoom().getDescription());
-        // this could be a separate method so the player can
-        // simply request the exits on their own and not have to get the whole
-        // displayRoom again
+        System.out.println(">------------------------------------------------------<");
+    }
+
+    // displaying the exits & doors of the current room
+    public void displayExits() {
+        //System.out.println(">------------------------------------------------------<");
         System.out.println("\u001B[33mAvailable exits: \u001b[0m");
         for (Enumeration e = p1.getRoom().getExits().elements(); e.hasMoreElements();) {
             Exit an_exit = (Exit) e.nextElement();
-            System.out.println(an_exit.getFullDirectionName());
+            System.out.println("\t" + an_exit.getFullDirectionName());
         }
+        System.out.println();
         System.out.println("\u001B[33mAvailable doors: \u001b[0m");
         for (Enumeration d = p1.getRoom().getDoors().elements(); d.hasMoreElements();) {
             Door a_door = (Door) d.nextElement();
-            System.out.print(a_door.getName());
+            System.out.println("\t" + a_door.getName());
         }
-        System.out.println();
-        // just for testing purposes ---
+        System.out.println(">------------------------------------------------------<");
+    }
+
+    // displaying the Items and Things in the current Room
+    public void displayItemsAndThings() {
+        //System.out.println(">------------------------------------------------------<");
         System.out.println("\u001B[33mAvailable items:\u001b[0m");
         for (Enumeration i = p1.getRoom().getItems().elements(); i.hasMoreElements();) {
             Item an_item = (Item) i.nextElement();
-            System.out.println(an_item.getName());
+            System.out.println("\t" + an_item.getName());
         }
         System.out.println();
         System.out.println("\u001B[33mAvailable things: \u001b[0m");
         for (Enumeration t = p1.getRoom().getThings().elements(); t.hasMoreElements();) {
             Thing a_thing = (Thing) t.nextElement();
-            System.out.println(a_thing.getName());
+            System.out.println("\t" + a_thing.getName());
         }
-        System.out.println(">--------------------------------------<");
+        System.out.println(">------------------------------------------------------<");
     }
 
-    //Player input
+    public void displayInventory() {
+        System.out.println("⟔---------------------------------------");
+        System.out.println(p1.getInvItems()); // TODO: Needs a loop to get only each item's name so it looks good.
+        System.out.println("---------------------------------------⟓");
+        System.out.println("\u001B[38;5;199mPress Enter key to return in exploration\u001b[0m");
+        System.out.println();
+        try {
+            System.in.read();
+        } catch (Exception ignored) {
+        }
+    }
+
+    // display description Item/Thing/Door
+    public void displayDesc(Item item) {
+        System.out.println(item.getName());
+        System.out.print("\t");
+        System.out.println(item.getDesc());
+    }
+    public void  displayDesc(Thing thing) {
+        System.out.println(thing.getName());
+        System.out.print("\t");
+        System.out.println(thing.getDesc());
+    }
+    public void displayDesc(Door door) {
+        System.out.println(door.getName());
+        System.out.print("\t");
+        System.out.print(door.getDesc());
+    }
+
+    //Player input & processing
     public void playerInput() {
         boolean success = false;  // probably there is a better way, but this is what I could do...
         Scanner input = new Scanner(System.in);
@@ -129,10 +176,8 @@ public class mainLoop {
         String cmd = input.nextLine();
         cmd = cmd.toUpperCase();
 
-        // verb
-        String command;
-        // noun(s)
-        String selection;
+        String command;     // verb
+        String selection;   // noun(s)
         // make a joiner to join the words after the first, is there any other way to do this easier/faster ?
         // Check if user's input is more than one word
         // if it has more than one word then all the words after the
@@ -188,8 +233,10 @@ public class mainLoop {
                     break;
                 case "DROP":
                     // drop item from inventory and add it to the room
-                    // No matter how I do it I get an java.util.ConcurrentModificationException here ???
-                    for (Item an_item : p1.getInvItems()) {
+                    // No matter how I do it I get a java.util.ConcurrentModificationException here ???
+                    // OK if we create a copy of the arraylist we do not get that exception.
+                    ArrayList<Item> inventory = new ArrayList<>(p1.getInvItems());
+                    for (Item an_item : inventory) {
                         if (an_item.getName().compareToIgnoreCase(selection) == 0) {
                             p1.removeInvItems(an_item);
                             p1.getRoom().addItem(an_item);
@@ -203,7 +250,7 @@ public class mainLoop {
                     Thread.sleep(slowdown);
                     break;
                 case "LOOK":
-                    // print all items/things that exist in the room
+                    // TODO: print all items/things that exist in the room
                     if (selection.equals("AROUND")) {
                         System.out.println("\u001B[33mLooking around for details...\u001b[0m\n");
                         Thread.sleep(slowdown * 2);
@@ -216,13 +263,7 @@ public class mainLoop {
                     }
                     // print all items in the player's inventory
                     if (selection.equals("INV") || selection.equals("INVENTORY")) {
-                        System.out.println(p1.getInvItems());
-
-                        System.out.println("\u001B[38;5;199mPress Enter key to return in exploration\u001b[0m");
-                        try {
-                            System.in.read();
-                        } catch (Exception e) {
-                        }
+                        displayInventory();
                     }
                     break;
                 case "USE":
@@ -263,8 +304,8 @@ public class mainLoop {
                     break;
             }
         } catch (Exception e) {
-            System.err.println(e);
-            System.err.println("Wrong input. The command must be like the examples (GO NORTH, TAKE KEY, etc)");
+            // I think you log exception something like this...
+            Logger.getLogger("Commnads input.").log(Level.INFO, "An exception in the command's switch occurred: ", e);
         }
         // switch end ---
     }
