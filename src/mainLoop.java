@@ -90,7 +90,6 @@ public class mainLoop {
 
         // player starting position
         p1.setRoom(rooms[0]);
-
     }
 
     // displays the current room title, description and exits
