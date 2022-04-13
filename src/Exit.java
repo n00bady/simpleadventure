@@ -1,8 +1,11 @@
-public class Exit {
+import java.io.Serializable;
+
+public class Exit implements Serializable {
     // This is the Exit class used to link Rooms together
     // we use this to connect each exit of a room with
     // another room.
     // It needs a direction(full or short name) and another room
+    // TODO: possibly add more directions like NorthEast, southwest up/down etc...
 
     // Numerical codes
     public static final int UNDEFINED = 0;

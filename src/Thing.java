@@ -1,4 +1,9 @@
-public class Thing {
+import java.io.Serializable;
+
+public class Thing implements Serializable {
+    // This is used for non pickable items like statues
+    // TODO: Add functionality so it can be used for button and levers
+
     private String name;
     private String desc;
 

@@ -1,4 +1,6 @@
-public class Door {
+import java.io.Serializable;
+
+public class Door implements Serializable {
     // After not careful consideration I decided to make the doors
     // a class on their own.
 

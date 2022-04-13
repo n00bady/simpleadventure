@@ -1,4 +1,10 @@
-public class Item {
+import java.io.Serializable;
+
+public class Item implements Serializable {
+    // This class is used for any pickable item the player encounters
+    // TODO: Might need to add more things like damage, effects etc...
+    //       if we want to add combat or other mechanics in the game.
+
     private String name;
     private String desc;
 
