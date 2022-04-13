@@ -47,7 +47,7 @@ public class mainLoop {
             displayRoom();
             // displaying exits and doors
             displayExits();
-            // displaing items and things
+            // displaying items and things
             displayItemsAndThings();
             // get player input
             playerInput();
@@ -71,7 +71,7 @@ public class mainLoop {
         rooms[1] = new Room("Second room.", "An empty room.");
         rooms[2] = new Room("Exit room", "You found the exit.");
         rooms[3] = new Room("An empty room", "A large empty room.");
-        rooms[4] = new Room("Restroom", "A very dirty and dillapitated restroom. Yuck!");
+        rooms[4] = new Room("Restroom", "A very dirty and dilapidated restroom. Yuck!");
 
         // Keys creation
         Item key1 = new Item ("Key", "An small shiny key.");
@@ -325,7 +325,7 @@ public class mainLoop {
             }
         } catch (Exception e) {
             // I think you log exception something like this...
-            Logger.getLogger("Commnads input.").log(Level.INFO, "An exception in the command's switch occurred: ", e);
+            Logger.getLogger("Commands input.").log(Level.INFO, "An exception in the command's switch occurred: ", e);
         }
         // switch end ---
     }
