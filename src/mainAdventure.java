@@ -1,5 +1,5 @@
 public class mainAdventure {
-    public static void main (String args[]) {
+    public static void main (String args[]) throws Exception {
         // print banner title
         System.out.println("\u001B[38;5;199m");
         System.out.println("""

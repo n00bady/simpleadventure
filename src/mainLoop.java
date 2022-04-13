@@ -1,3 +1,4 @@
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.Scanner;
@@ -10,19 +11,29 @@ public class mainLoop {
     //      Add an actual smoll scenario instead of just example cases!
     //      better selection recognition for playerInput().
 
+    public static final String filename = "world.sav";
     private Room rooms[];
     private Player p1 = new Player();
     private int slowdown = 1500; // Used to simulate the time it takes to do an action
     boolean quit = false;
 
-    public void startLoop() {
+    public void startLoop() throws Exception {
         // init player
-        System.out.println("Choose your name: ");
-        Scanner input = new Scanner(System.in);
-        p1.setName(input.nextLine());
-        System.out.println("Your name is: " + p1.getName());
-        // init world
-        initWorld();
+        File tempFile = new File(filename);
+        if (!tempFile.exists()) {
+            System.out.println("Choose your name: ");
+            Scanner input = new Scanner(System.in);
+            p1.setName(input.nextLine());
+            System.out.println("Your name is: " + p1.getName());
+            // init world
+            initWorld();
+        } else {
+            FileInputStream fin = new FileInputStream(filename);
+            ObjectInputStream objIN = new ObjectInputStream(fin);
+            GameData load_save = (GameData) objIN.readObject();
+            rooms = load_save.getRooms();
+            p1 = load_save.getPlayer();
+        }
 
         // this is the main game loop
         do {
@@ -296,6 +307,11 @@ public class mainLoop {
                     break;
                 case "QUIT":
                     System.out.println("TERMINATING...");
+                    FileOutputStream fout = new FileOutputStream(filename);
+                    ObjectOutputStream objOUT = new ObjectOutputStream(fout);
+                    GameData save = new GameData(rooms, p1);
+                    objOUT.writeObject(save);
+
                     // should we use the quit variable here or this is fine ???
                     System.exit(0);
                 default:

@@ -1,4 +1,6 @@
-public class Exit {
+import java.io.Serializable;
+
+public class Exit implements Serializable {
     // This is the Exit class used to link Rooms together
     // we use this to connect each exit of a room with
     // another room.

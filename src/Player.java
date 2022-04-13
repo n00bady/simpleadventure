@@ -1,8 +1,8 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Vector;
 
-public class Player {
+public class Player implements Serializable {
     // This is the player class anything related to player goes here
     // TODO: Need to have:
     //                      his name(String) and methods to set and get that name

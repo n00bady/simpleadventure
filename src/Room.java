@@ -1,7 +1,8 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Vector;
 
-public class Room {
+public class Room implements Serializable {
     // This is the room class each room belongs is of this class
     // we use this to create all rooms for our adventure it needs
     // a title a description and the exits(as a Vector).
