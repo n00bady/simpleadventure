@@ -5,6 +5,7 @@ public class Exit implements Serializable {
     // we use this to connect each exit of a room with
     // another room.
     // It needs a direction(full or short name) and another room
+    // TODO: possibly add more directions like NorthEast, southwest up/down etc...
 
     // Numerical codes
     public static final int UNDEFINED = 0;

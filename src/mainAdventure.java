@@ -1,5 +1,6 @@
 public class mainAdventure {
     public static void main (String args[]) throws Exception {
+        // It all starts from here
         // print banner title
         System.out.println("\u001B[38;5;199m");
         System.out.println("""
@@ -10,6 +11,7 @@ public class mainAdventure {
                                    _|                                                             \s""");
         System.out.println("\u001b[0m");
 
+        // and start the game !
         mainLoop startGame = new mainLoop();
         startGame.startLoop();
     }

@@ -4,11 +4,8 @@ import java.util.List;
 
 public class Player implements Serializable {
     // This is the player class anything related to player goes here
-    // TODO: Need to have:
-    //                      his name(String) and methods to set and get that name
-    //                      his HP(Int) and ways to get, increase and decrease it
-    //                      his current location (Room) and a method to get it
-    //
+    // TODO: If we wanna have battles we need to add some kind of dagame or other stats here and
+    //          ofcourse ways to set and get them
 
     private String name;
     private int HP;

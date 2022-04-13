@@ -8,19 +8,21 @@ import java.util.logging.Logger;
 
 public class mainLoop {
     // TODO: More commands, fix the exceptions, prettify the displaying of all.
-    //      Add an actual smoll scenario instead of just example cases!
+    //      Add an actual small scenario instead of just example cases!
     //      better selection recognition for playerInput().
 
-    public static final String filename = "world.sav";
+    public static final String filename = "world.sav";  // the name of the save file TODO: support for multiple saves ?
     private Room rooms[];
     private Player p1 = new Player();
     private int slowdown = 1500; // Used to simulate the time it takes to do an action
     boolean quit = false;
 
     public void startLoop() throws Exception {
-        // init player
+        // INIT
+        // first check if a save file exists
         File tempFile = new File(filename);
         if (!tempFile.exists()) {
+            // if it doesn't create a new player and world
             System.out.println("Choose your name: ");
             Scanner input = new Scanner(System.in);
             p1.setName(input.nextLine());
@@ -28,6 +30,7 @@ public class mainLoop {
             // init world
             initWorld();
         } else {
+            // if a save file exists then load the rooms and p1 variables
             FileInputStream fin = new FileInputStream(filename);
             ObjectInputStream objIN = new ObjectInputStream(fin);
             GameData load_save = (GameData) objIN.readObject();
@@ -37,7 +40,7 @@ public class mainLoop {
 
         // this is the main game loop
         do {
-            // TODO: Only the display room should be printed every loop the rest shoudl be called
+            // TODO: Only the display room should be printed every loop the rest should be called
             //      by the player using the appropriate commands.
 
             // displaying rooms
@@ -58,7 +61,7 @@ public class mainLoop {
     }
 
     // In theory, we can have multiple world and initialize whichever we want.
-    // TODO: each world will be it's own class created manually and initWorld() should only
+    // TODO: each world will be in it's own class created manually and initWorld() should only
     //      initialize the world it's been asked too...
     public void initWorld() {
 
@@ -307,6 +310,7 @@ public class mainLoop {
                     break;
                 case "QUIT":
                     System.out.println("TERMINATING...");
+                    // Save before you quit
                     FileOutputStream fout = new FileOutputStream(filename);
                     ObjectOutputStream objOUT = new ObjectOutputStream(fout);
                     GameData save = new GameData(rooms, p1);

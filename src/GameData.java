@@ -1,7 +1,9 @@
 import java.io.Serializable;
-import java.util.ArrayList;
 
 public class GameData implements Serializable {
+    // This is a POJO class that helps in saving the rooms and the player state
+    // might need to be updated if we make significant changes to the other classes
+
     private Room s_rooms[];
     private Player s_player;
 
