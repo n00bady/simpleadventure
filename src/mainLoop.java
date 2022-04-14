@@ -12,9 +12,9 @@ public class mainLoop {
     //      better selection recognition for playerInput().
 
     public static final String filename = "world.sav";  // the name of the save file TODO: support for multiple saves ?
-    private Room rooms[];
+    private Room[] rooms;
     private Player p1 = new Player();
-    private int slowdown = 1500; // Used to simulate the time it takes to do an action
+    private final int slowdown = 1500; // Used to simulate the time it takes to do an action
     boolean quit = false;
 
     public void startLoop() throws Exception {
@@ -205,7 +205,7 @@ public class mainLoop {
             }
         }
         selection = String.valueOf(joiner);
-        // poor mans debbugger
+        // poor mans debugger
         System.out.println("Used command: " + command);
         System.out.println("Selection: " + selection);
         System.out.println();
@@ -311,8 +311,8 @@ public class mainLoop {
                 case "QUIT":
                     System.out.println("TERMINATING...");
                     // Save before you quit
-                    FileOutputStream fout = new FileOutputStream(filename);
-                    ObjectOutputStream objOUT = new ObjectOutputStream(fout);
+                    FileOutputStream fOut = new FileOutputStream(filename);
+                    ObjectOutputStream objOUT = new ObjectOutputStream(fOut);
                     GameData save = new GameData(rooms, p1);
                     objOUT.writeObject(save);
 
