@@ -224,7 +224,7 @@ public class mainLoop {
                     break;
                 case "LOOK":
                     // TODO: print all items/things that exist in the room
-                    if ((selection.equals("AROUND")) || (selection.equals("A"))) {
+                    if ((selection.equals("AROUND")) || (selection.equals("A"))) {      // LOOK AROUND
                         System.out.println("\u001B[33mLooking around for details...\u001b[0m\n");
                         Thread.sleep(slowdown * 2);
 
@@ -238,8 +238,14 @@ public class mainLoop {
                         }
                     }
                     // print all items in the player's inventory
-                    if (selection.equals("INV") || selection.equals("INVENTORY")) {
+                    if (selection.equals("INVENTORY") || selection.equals("INV") || selection.equals("I")) {     // LOOK INVENTORY
                         displayInventory();
+                    }
+                    if (selection.equals("EXITS") || selection.equals("E")) {       // LOOK EXITS
+                        displayExits();
+                    }
+                     if (selection.equals("THINGS") || selection.equals("T")) {     // LOOK THINGS
+                         displayItemsAndThings();
                     }
                     break;
                 case "USE":
