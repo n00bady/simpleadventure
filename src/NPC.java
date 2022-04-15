@@ -27,6 +27,14 @@ public class NPC implements Serializable {
         this.name = name;
     }
 
+    public String getDesc() {
+        return desc;
+    }
+
+    public void SetDesc(String desc) {
+        this.desc = desc;
+    }
+
     public String getDialogue() {
         return dialogue;
     }
@@ -50,6 +58,14 @@ public class NPC implements Serializable {
         else HP = hp;
     }   */
 
+    public boolean getAttackable(){
+        return hostile;
+    }
+
+    public void SetAttackable(boolean hostile) {
+        this.hostile = hostile;
+    }
+
     //Set HP
     public void SetHP(int hp) {
         HP = hp;
@@ -60,7 +76,7 @@ public class NPC implements Serializable {
         return HP;
     }
 
-    // Set decrease HP
+    // Decrease HP
     public void decreaseHP(int damage) {
         HP = HP - damage;
     }
