@@ -224,7 +224,7 @@ public class mainLoop {
                     break;
                 case "LOOK":
                     // TODO: print all items/things that exist in the room
-                    if (selection.equals("AROUND")) {
+                    if ((selection.equals("AROUND")) || (selection.equals("A"))) {
                         System.out.println("\u001B[33mLooking around for details...\u001b[0m\n");
                         Thread.sleep(slowdown * 2);
 
