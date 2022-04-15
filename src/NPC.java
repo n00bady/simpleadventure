@@ -10,14 +10,6 @@ public class NPC implements Serializable {
     public NPC() {
     }
 
-    //  Neutral NPC
-    public NPC(String name, String desc, String dialogue) {
-        this.name = name;
-        this.desc = desc;
-        this.dialogue = dialogue;
-    }
-
-    //  Hostile/Friendly NPC
     public NPC(String name, String desc, String dialogue, boolean hostile, int hp, int damage) {
         this.name = name;
         this.desc = desc;
