@@ -45,9 +45,9 @@ public class mainLoop {
             // displaying rooms
             displayRoom();
             // displaying exits and doors
-            displayExits();
+            //displayExits();
             // displaying items and things
-            displayItemsAndThings();
+            //displayItemsAndThings();
             // get player input
             playerInput();
 
@@ -227,7 +227,10 @@ public class mainLoop {
                     if (selection.equals("AROUND")) {
                         System.out.println("\u001B[33mLooking around for details...\u001b[0m\n");
                         Thread.sleep(slowdown * 2);
-                        System.out.println("\u001B[33mThe room is empty.\u001b[0m");
+
+                        displayExits();
+                        displayItemsAndThings();
+
                         System.out.println("\u001B[38;5;199mPress Enter key to return in exploration\u001b[0m");
                         try {
                             System.in.read();
