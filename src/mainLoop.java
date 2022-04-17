@@ -43,18 +43,10 @@ public class mainLoop {
         }
         // this is the main game loop
         do {
-            // TODO: Only the display room should be printed every loop the rest should be called
-            //      by the player using the appropriate commands.
-
-            // displaying rooms
+            // display current Room
             displayRoom();
-            // displaying exits and doors
-            //displayExits();
-            // displaying items and things
-            //displayItemsAndThings();
-            // get player input
+            // get and proccess player's input
             playerInput();
-
             // winning condition
             if (p1.getRoom() == rooms[2]) {
                 System.out.println("\u001b[1;32mCongrats you found the exit!!!\u001b[0m");
