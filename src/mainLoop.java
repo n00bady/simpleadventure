@@ -62,7 +62,7 @@ public class mainLoop {
         p1 = newWorld.getPlayer();
     }
 
-    public void help(String selection){
+    public void help(String command){
         System.out.println("The available commands are the following:\n");
             System.out.println("\u001B[33mGO\u001b[0m \u001B[36m<direction>\u001b[0m -> \u001B[33mMoving through the rooms.\u001b[0m");
             System.out.println("\t\u001B[31mExample:\u001b[0m \u001B[33mGO\u001b[0m \u001B[36mWEST\u001b[0m");
@@ -298,7 +298,7 @@ public class mainLoop {
                     Thread.sleep(slowdown);
                     break;
                 case "HELP":
-                        help(selection);
+                        help(command);
                     break;
                 case "QUIT":
                     System.out.println("\u001b[1;33mSaving game state...\u001b[0m");
