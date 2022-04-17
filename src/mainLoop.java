@@ -118,12 +118,6 @@ public class mainLoop {
         System.out.println("⟔---------------------------------------");
         System.out.println(p1.getInvItems()); // TODO: Needs a loop to get only each item's name so it looks good.
         System.out.println("---------------------------------------⟓");
-        System.out.println("\u001B[38;5;199mPress Enter key to return in exploration\u001b[0m");
-        System.out.println();
-        try {
-            System.in.read();
-        } catch (Exception ignored) {
-        }
     }
 
     // display description Item/Thing/Door
@@ -143,7 +137,7 @@ public class mainLoop {
         System.out.print(door.getDesc());
     }
 
-    //Player input & processing
+    //Player input processing and logic
     public void playerInput() {
         boolean success = false;  // probably there is a better way, but this is what I could do...
         Scanner input = new Scanner(System.in);
@@ -160,7 +154,7 @@ public class mainLoop {
         // if it has more than one word then all the words after the
         // first and put it in a single string selection
         StringJoiner joiner = new StringJoiner(" ");
-        String words[] = cmd.split("\\s+");
+        String[] words = cmd.split("\\s+");
         command = words[0];
         if (words.length > 1) {
             for (int w=1;w<=(words.length-1);w++) {
@@ -168,6 +162,7 @@ public class mainLoop {
             }
         }
         selection = String.valueOf(joiner);
+
         // poor mans debugger
         System.out.println("Used command: " + command);
         System.out.println("Selection: " + selection);
@@ -231,29 +226,35 @@ public class mainLoop {
                     if ((selection.equals("AROUND")) || (selection.equals("A"))) {      // LOOK AROUND
                         System.out.println("\u001B[33mLooking around for details...\u001b[0m\n");
                         Thread.sleep(slowdown * 2);
-
                         displayExits();
                         displayItemsAndThings();
-
-                        System.out.println("\u001B[38;5;199mPress Enter key to return in exploration\u001b[0m");
-                        try {
-                            System.in.read();
-                        } catch (Exception ignored) {
-                        }
+                        success = true;
                     }
                     // print all items in the player's inventory
                     if (selection.equals("INVENTORY") || selection.equals("INV") || selection.equals("I")) {     // LOOK INVENTORY
                         displayInventory();
+                        success = true;
                     }
                     if (selection.equals("EXITS") || selection.equals("E")) {       // LOOK EXITS
                         displayExits();
+                        success = true;
                     }
                      if (selection.equals("THINGS") || selection.equals("T")) {     // LOOK THINGS
                          displayItemsAndThings();
+                         success = true;
+                    }
+                    if (!success) { System.out.println("There is nothing here..."); }
+                    // wait a little for the player
+                    System.out.println("\u001B[38;5;199mPress Enter key to return in exploration\u001b[0m");
+                    try {
+                        System.in.read();
+                    } catch (Exception ignored) {
                     }
                     break;
                 case "USE":
                     // use things or items, open doors etc...
+                    // TODO: Doors and containers need to use a seperate command OPEN,
+                    //      USE will be used with Items and possibly Things.
                     for (Enumeration d = p1.getRoom().getDoors().elements(); d.hasMoreElements(); ) {
                         Door a_door = (Door) d.nextElement();
                         if (a_door.getName().compareToIgnoreCase(selection) == 0) {
