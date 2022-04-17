@@ -23,19 +23,23 @@ public class mainLoop {
         File tempFile = new File(filename);
         if (!tempFile.exists()) {
             // if it doesn't create a new player and world
+            System.out.println("\u001b[1;36mCreating new World!\u001b[0m");
+            // init world
+            initWorld();
             System.out.println("Choose your name: ");
             Scanner input = new Scanner(System.in);
             p1.setName(input.nextLine());
-            System.out.println("Your name is: " + p1.getName());
-            // init world
-            initWorld();
+            System.out.println("Welcome " + p1.getName() + "!");
         } else {
             // if a save file exists then load the rooms and p1 variables
+            System.out.println("\u001b[1;36mSave file found!\u001b[0m");
+            System.out.println("\u001b[1;33mLOADING...\u001b[0m");
             FileInputStream fin = new FileInputStream(filename);
             ObjectInputStream objIN = new ObjectInputStream(fin);
             GameData load_save = (GameData) objIN.readObject();
             rooms = load_save.getRooms();
             p1 = load_save.getPlayer();
+            System.out.println("Welcome back " + p1.getName() + "!");
         }
         // this is the main game loop
         do {
@@ -53,7 +57,7 @@ public class mainLoop {
 
             // winning condition
             if (p1.getRoom() == rooms[2]) {
-                System.out.println("Congrats you found the exit!");
+                System.out.println("\u001b[1;32mCongrats you found the exit!!!\u001b[0m");
                 quit = true;
             }
         } while (!quit);
@@ -277,13 +281,13 @@ public class mainLoop {
                     Thread.sleep(slowdown);
                     break;
                 case "QUIT":
-                    System.out.println("TERMINATING...");
+                    System.out.println("\u001b[1;33mSaving game state...\u001b[0m");
                     // Save before you quit
                     FileOutputStream fOut = new FileOutputStream(filename);
                     ObjectOutputStream objOUT = new ObjectOutputStream(fOut);
                     GameData save = new GameData(rooms, p1);
                     objOUT.writeObject(save);
-
+                    System.out.println("\u001b[1;31mTERMINATING...\u001b[0m");
                     // should we use the quit variable here or this is fine ???
                     System.exit(0);
                 default:
