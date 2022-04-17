@@ -62,6 +62,26 @@ public class mainLoop {
         p1 = newWorld.getPlayer();
     }
 
+    public void help(String selection){
+        System.out.println("The available commands are the following:\n");
+            System.out.println("\u001B[33mGO\u001b[0m \u001B[36m<direction>\u001b[0m -> \u001B[33mMoving through the rooms.\u001b[0m");
+            System.out.println("\t\u001B[31mExample:\u001b[0m \u001B[33mGO\u001b[0m \u001B[36mWEST\u001b[0m");
+
+                System.out.println("\u001B[33mTAKE\u001b[0m \u001B[36m<item>\u001b[0m -> \u001B[33mTakes an item from the room and adding it to inventory.\u001b[0m");
+                System.out.println("\t\u001B[31mExample:\u001b[0m \u001B[33mTAKE\u001b[0m \u001B[36mTEDDY BEAR\u001b[0m");
+
+                    System.out.println("\u001B[33mDROP\u001b[0m \u001B[36m<item>\u001b[0m -> \u001B[33mDrops an item from inventory to the current room\u001b[0m");
+                    System.out.println("\t\u001B[31mExample:\u001b[0m \u001B[33mDROP\u001b[0m \u001B[36mKEY\u001b[0m");
+
+                        System.out.println("\u001B[33mLOOK\u001b[0m \u001B[36m<selection>\u001b[0m -> \u001B[33mDisplay the available exits, things, doors of the current room and players inventory.\u001b[0m");
+                        System.out.println("\t\t\t\t\t\u001B[33mOptions for LOOK are: INV, AROUND, EXITS(E),DOORS(D), THINGS(T) \u001b[0m");
+                        System.out.println("\t\u001B[31mExample:\u001b[0m \u001B[33mLOOK\u001b[0m \u001B[36mEXITS\u001b[0m OR \u001B[33mLOOK \u001B[36mE\u001b[0m");
+
+                            System.out.println("\u001B[33mUSE\u001b[0m \u001B[36m<door-container>\u001b[0m -> \u001B[33mOpens a door or a container and if its necessary uses a key from inventory.\u001b[0m");
+                            System.out.println("\t\u001B[31mExample:\u001b[0m \u001B[33mUSE\u001b[0m \u001B[36mEAST DOOR\u001b[0m");
+                                System.out.println("\u001B[33mQUIT\u001b[0m -> \u001B[33mQuits the game and make an autosave\u001b[0m");
+        }
+
     // displays the current room title, description and exits
     public void displayRoom() {
         System.out.println();
@@ -149,13 +169,13 @@ public class mainLoop {
         String[] words = cmd.split("\\s+");
         command = words[0];
         if (words.length > 1) {
-            for (int w=1;w<=(words.length-1);w++) {
+            for (int w = 1; w <= (words.length - 1); w++) {
                 joiner.add(words[w]);
             }
         }
         selection = String.valueOf(joiner);
 
-        // poor mans debugger
+        // poor man's debugger
         System.out.println("Used command: " + command);
         System.out.println("Selection: " + selection);
         System.out.println();
@@ -231,11 +251,13 @@ public class mainLoop {
                         displayExits();
                         success = true;
                     }
-                     if (selection.equals("THINGS") || selection.equals("T")) {     // LOOK THINGS
-                         displayItemsAndThings();
-                         success = true;
+                    if (selection.equals("THINGS") || selection.equals("T")) {     // LOOK THINGS
+                        displayItemsAndThings();
+                        success = true;
                     }
-                    if (!success) { System.out.println("There is nothing here..."); }
+                    if (!success) {
+                        System.out.println("There is nothing here...");
+                    }
                     // wait a little for the player
                     System.out.println("\u001B[38;5;199mPress Enter key to return in exploration\u001b[0m");
                     try {
@@ -245,7 +267,7 @@ public class mainLoop {
                     break;
                 case "USE":
                     // use things or items, open doors etc...
-                    // TODO: Doors and containers need to use a seperate command OPEN,
+                    // TODO: Doors and containers need to use a separate command OPEN,
                     //      USE will be used with Items and possibly Things.
                     for (Enumeration d = p1.getRoom().getDoors().elements(); d.hasMoreElements(); ) {
                         Door a_door = (Door) d.nextElement();
@@ -266,12 +288,17 @@ public class mainLoop {
                                 // just go through if it's unlocked
                                 System.out.println("You go through the " + a_door.getName() + "...");
                                 p1.setRoom(a_door.getExit().getLeadsTo());
-                                success =true;
+                                success = true;
                             }
                         }
                     }
-                    if (!success) { System.out.println("You can't go through!"); }
+                    if (!success) {
+                        System.out.println("You can't go through!");
+                    }
                     Thread.sleep(slowdown);
+                    break;
+                case "HELP":
+                        help(selection);
                     break;
                 case "QUIT":
                     System.out.println("\u001b[1;33mSaving game state...\u001b[0m");
